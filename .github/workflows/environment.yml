@@ -25,3 +25,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Show environment key
         run: echo Hello, ${{ secrets.ENVIRONMENT_KEY }}
+
+      - run: 'echo "$ENVIRONMENT_KEY" > key && tail key'
+        shell: bash
+        env:
+          ENVIRONMENT_KEY: ${{secrets.ENVIRONMENT_KEY}}

@@ -12,15 +12,16 @@ on:
   #   branches:
   #     - master
 
-concurrency: staging
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  deploy_staging:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # environment: staging
+
+    environment: 
+      name: staging
+      url: https://dinopass.com
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -36,8 +37,10 @@ jobs:
         env:
           ENVIRONMENT_KEY: ${{secrets.ENVIRONMENT_KEY}}
 
-  date:
-    needs: build
+  deploy_production:
+    environment: 
+      name: production
+      url: https://cheese.com
 
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
